@@ -3,16 +3,24 @@ import { DownIcon } from "../icons/downIcon";
 import { UpAndDown } from "../icons/upAndDown";
 import { useState } from "react";
 
-export const Orders = () => {
-  const [status, setStatus] = useState("Pending");
-  const handleStatus = () => {
-    setStatus(status);
+export const Orders = (props) => {
+  const [state, setState] = useState(false);
+  // const [status, setStatus] = useState("Pending");
+  const { countDeliveryState, index } = props;
+
+  const statusBtn = () => {
+    setState(!state);
   };
+  console.log("this is state", state);
 
   return (
     <div className="h-14 flex flex-row border-b">
       <div className="w-12 h-14 flex justify-center items-center">
-        <input type="checkbox" className="cursor-pointer" />
+        <input
+          type="checkbox"
+          className="cursor-pointer"
+          onChange={countDeliveryState(index)}
+        />
       </div>
       <div className="w-14 h-14 flex justify-center items-center">
         <span className="text-[14px] font-normal">1</span>
@@ -52,9 +60,37 @@ export const Orders = () => {
         <button
           className={`min-w-[94px] h-8 border cursor-pointer rounded-[80px] text-[12px] 
         font-semibold ml-4 flex items-center justify-evenly`}
+          onClick={statusBtn}
         >
           Pending <UpAndDown />
         </button>
+        {state === true ? (
+          <div
+            className="w-36 h-[116px] bg-white absolute mt-[147px] shadow-2xl
+            rounded-2xl flex flex-col items-baseline justify-evenly pl-2.5"
+          >
+            <button
+              className="cursor-pointer w-[75px] h-6 bg-zinc-100
+            rounded-2xl text-[12px] font-medium text-black"
+            >
+              Delivered
+            </button>
+            <button
+              className="cursor-pointer w-[67px] h-6 bg-zinc-100
+            rounded-2xl text-[12px] font-medium text-black"
+            >
+              Pending
+            </button>
+            <button
+              className="cursor-pointer w-[78px] h-6 bg-zinc-100
+            rounded-2xl text-[12px] font-medium text-black"
+            >
+              Cancelled
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -24,7 +24,6 @@ export const FoodMenu = () => {
         </div>
       </div>
       <CategorySection />
-      
     </div>
   );
 };

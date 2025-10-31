@@ -1,7 +1,25 @@
+"use client";
+import { use, useState } from "react";
 import { Orders } from "../components/orders";
 import { UpAndDown } from "../icons/upAndDown";
 
 export const FoodOrder = () => {
+  const [state, setState] = useState(false);
+
+  const countDeliveryState = Object.values(state).reduce(
+    (prev, cur) => (cur === true ? prev + 1 : prev),
+    0
+  );
+
+  const checkOrder = (index) => () => {
+    if (state[index] === true) {
+      setState({ ...state, [index]: false });
+    } else {
+      setState({ ...state, [index]: true });
+    }
+  };
+  console.log(state, countDeliveryState);
+
   return (
     <div className="flex flex-col gap-6">
       <button className="w-full flex justify-end">
@@ -19,10 +37,21 @@ export const FoodOrder = () => {
           <div className="flex gap-3">
             <input type="date" />
             <button
-              className={`w-[179px] h-9 rounded-[80px] cursor-pointer bg-zinc-300 text-[14px]
-          font-medium content-center`}
+              className={`flex items-center pl-4 pr-4 min-w-[179px] h-9
+              rounded-[80px] cursor-pointer text-[14px] gap-2
+              font-medium text-white content-center ${
+                countDeliveryState > 0 ? "bg-black" : "bg-zinc-200"
+              }`}
             >
               Change delivery state
+              {countDeliveryState > 0 && (
+                <div
+                  className="text-[12px] flex text-black bg-white
+                font-semibold justify-center items-center rounded-2xl w-[26px] h-5"
+                >
+                  {countDeliveryState}
+                </div>
+              )}
             </button>
           </div>
         </div>
@@ -77,7 +106,9 @@ export const FoodOrder = () => {
           </div>
         </div>
         <div className="divide-y">
-          <Orders />
+          <Orders countDeliveryState={checkOrder} index={0} />
+          <Orders countDeliveryState={checkOrder} index={1} />
+          <Orders countDeliveryState={checkOrder} index={2} />
         </div>
       </div>
     </div>
