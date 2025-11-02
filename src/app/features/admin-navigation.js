@@ -2,7 +2,6 @@
 import { LogoContainer } from "../components/logoContainer";
 import { FoodMenuLogoBlack } from "../icons/foodMenuBlack-logo";
 import { OrderBlackLogo } from "../icons/orderBlack-logo";
-import { useState } from "react";
 import { OrderWhiteLogo } from "../icons/orderWhite-Logo";
 import { FoodMenuLogoWhite } from "../icons/foodMenuWhite-logo";
 

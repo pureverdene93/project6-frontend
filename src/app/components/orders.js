@@ -2,11 +2,27 @@
 import { DownIcon } from "../icons/downIcon";
 import { UpAndDown } from "../icons/upAndDown";
 import { useState } from "react";
+import { changeStatusFunctionDelivered } from "./changeStatusFunctionDelivered";
 
 export const Orders = (props) => {
   const [state, setState] = useState(false);
-  // const [status, setStatus] = useState("Pending");
+  const [status, setStatus] = useState("Pending");
   const { countDeliveryState, index } = props;
+
+  const handleDelivered = () => {
+    setStatus("Delivered");
+    setState(false);
+  };
+
+  const handleCancelled = () => {
+    setStatus("Cancelled");
+    setState(false);
+  };
+
+  const handlePending = () => {
+    setStatus("Pending");
+    setState(false);
+  };
 
   const statusBtn = () => {
     setState(!state);
@@ -59,10 +75,12 @@ export const Orders = (props) => {
       <div className="w-40 h-14 flex items-center justify-start">
         <button
           className={`min-w-[94px] h-8 border cursor-pointer rounded-[80px] text-[12px] 
-        font-semibold ml-4 flex items-center justify-evenly`}
+        font-semibold ml-4 flex items-center justify-evenly ${
+          status === "Pending" ? "border-red-500" : ""
+        } ${status === "Delivered" ? "border-green-500" : ""}`}
           onClick={statusBtn}
         >
-          Pending <UpAndDown />
+          {status} <UpAndDown />
         </button>
         {state === true ? (
           <div
@@ -72,18 +90,21 @@ export const Orders = (props) => {
             <button
               className="cursor-pointer w-[75px] h-6 bg-zinc-100
             rounded-2xl text-[12px] font-medium text-black"
+              onClick={changeStatusFunctionDelivered("Delivered", false)}
             >
               Delivered
             </button>
             <button
-              className="cursor-pointer w-[67px] h-6 bg-zinc-100
-            rounded-2xl text-[12px] font-medium text-black"
+              className={`cursor-pointer w-[67px] h-6 bg-zinc-100
+            rounded-2xl text-[12px] font-medium text-black`}
+              onClick={handlePending}
             >
               Pending
             </button>
             <button
               className="cursor-pointer w-[78px] h-6 bg-zinc-100
             rounded-2xl text-[12px] font-medium text-black"
+              onClick={handleCancelled}
             >
               Cancelled
             </button>

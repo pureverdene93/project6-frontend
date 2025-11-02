@@ -1,10 +1,13 @@
 "use client";
-import { use, useState } from "react";
+import { useState } from "react";
 import { Orders } from "../components/orders";
 import { UpAndDown } from "../icons/upAndDown";
+import { SetFalseDeliveryState } from "../icons/setFalseDeliveryState-icon";
+import { ChangeAllDeliveryState } from "../components/changeAllDeliveryState";
 
 export const FoodOrder = () => {
   const [state, setState] = useState(false);
+  const [deliveryState, setDeliveryState] = useState(false);
 
   const countDeliveryState = Object.values(state).reduce(
     (prev, cur) => (cur === true ? prev + 1 : prev),
@@ -19,6 +22,13 @@ export const FoodOrder = () => {
     }
   };
   console.log(state, countDeliveryState);
+
+  const handleDeliveryState = () => {
+    setDeliveryState(true);
+  };
+  const handleSetDeliveryStateFalse = () => {
+    setDeliveryState(false);
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -42,6 +52,7 @@ export const FoodOrder = () => {
               font-medium text-white content-center ${
                 countDeliveryState > 0 ? "bg-black" : "bg-zinc-200"
               }`}
+              onClick={handleDeliveryState}
             >
               Change delivery state
               {countDeliveryState > 0 && (
@@ -53,6 +64,13 @@ export const FoodOrder = () => {
                 </div>
               )}
             </button>
+            {deliveryState === true ? (
+              <ChangeAllDeliveryState
+                handleSetDeliveryStateFalse={handleSetDeliveryStateFalse}
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="flex items-center h-[52px] border-b">
