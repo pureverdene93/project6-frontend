@@ -2,7 +2,6 @@
 import { DownIcon } from "../icons/downIcon";
 import { UpAndDown } from "../icons/upAndDown";
 import { useState } from "react";
-import { changeStatusFunctionDelivered } from "./changeStatusFunctionDelivered";
 
 export const Orders = (props) => {
   const [state, setState] = useState(false);
@@ -90,7 +89,7 @@ export const Orders = (props) => {
             <button
               className="cursor-pointer w-[75px] h-6 bg-zinc-100
             rounded-2xl text-[12px] font-medium text-black"
-              onClick={changeStatusFunctionDelivered("Delivered", false)}
+              onClick={handleDelivered}
             >
               Delivered
             </button>

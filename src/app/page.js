@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminNavigation } from "./features/admin-navigation";
 import { FoodMenu } from "./features/foodMenu";
 import { FoodOrder } from "./features/foodOrder";
 
 export default function Home() {
-  const [state, setState] = useState("Order");
+  const [state, setState] = useState("Food menu");
 
   const clickFoodMenu = () => {
     setState("Food menu");
