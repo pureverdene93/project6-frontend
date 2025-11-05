@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SetFalseDeliveryState } from "../icons/setFalseDeliveryState-icon";
 
 export const EditAndAddNewFood = (props) => {
-  const { exit, title } = props;
+  const { exit, title, foodName } = props;
 
   const [image, setImage] = useState(null);
   const imageUpload = (event) => {
@@ -16,11 +16,11 @@ export const EditAndAddNewFood = (props) => {
   return (
     <div
       className="fixed z-50 bg-[rgba(0,0,0,0.5)] w-full h-full
-                      top-0 left-0 flex justify-center items-center"
+      top-0 left-0 flex justify-center items-center"
     >
       <div
         className="w-[460px] h-[592px] bg-white z-1 flex flex-col
-                    items-center justify-evenly m-[900px] absolute rounded-xl"
+        items-center justify-evenly m-[900px] absolute rounded-xl"
       >
         <div className="flex h-9 w-[412px] items-center justify-between">
           <p className="text-black font-semibold text-[18px]">{title}</p>
@@ -77,7 +77,7 @@ export const EditAndAddNewFood = (props) => {
                 />
                 <button
                   className="w-9 h-9 bg-zinc-200 rounded-full flex justify-center
-                            items-center cursor-pointer mr-[5px] mt-[5px]"
+                  items-center cursor-pointer mr-[5px] mt-[5px]"
                   onClick={() => setImage(null)}
                 >
                   <SetFalseDeliveryState />
@@ -90,7 +90,7 @@ export const EditAndAddNewFood = (props) => {
         <div className="w-[412px] flex justify-end">
           <button
             className="bg-black w-[93px] h-10 rounded-xl text-white flex
-                      justify-center items-center font-medium text-[14px] cursor-pointer"
+            justify-center items-center font-medium text-[14px] cursor-pointer"
           >
             Add dish
           </button>

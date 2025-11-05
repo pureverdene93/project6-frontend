@@ -5,7 +5,8 @@ import { AddFoodIcon } from "../icons/addFoodIcon";
 import { SetFalseDeliveryState } from "../icons/setFalseDeliveryState-icon";
 import { EditAndAddNewFood } from "./editAndAddNewFood";
 
-export const Addfood = () => {
+export const Addfood = (props) => {
+  const { foodName } = props;
   const [state, setState] = useState(false);
 
   return (
@@ -22,7 +23,7 @@ export const Addfood = () => {
       </button>
       {state === true ? (
         <EditAndAddNewFood
-          title={"Add new Dish to Appetizers"}
+          title={`Add new Dish to ${foodName}`}
           exit={() => setState(false)}
         />
       ) : (
@@ -30,7 +31,7 @@ export const Addfood = () => {
       )}
 
       <p className="text-[14px] font-medium text-black w-[150px] text-center">
-        Add new Dish to Appetizers
+        Add new Dish to {foodName}
       </p>
     </div>
   );

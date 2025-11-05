@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FoodEditIcon } from "../icons/editFood-Icon";
-import { EditAndAddNewFood } from "./editAndAddNewFood";
+import { EditFoodInfo } from "./editFoodInfo";
 
 export const FoodCard = (props) => {
   const { foodImg, foodName, foodIngredients, foodPrice } = props;
@@ -22,10 +22,7 @@ export const FoodCard = (props) => {
           <FoodEditIcon />
         </button>
         {editFoodState === true ? (
-          <EditAndAddNewFood
-            exit={() => setEditFoodState(false)}
-            title={"Edit food info"}
-          />
+          <EditFoodInfo exit={() => setEditFoodState(false)} />
         ) : (
           ""
         )}
