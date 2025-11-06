@@ -1,9 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import { AdminNavigation } from "./features/admin-navigation";
-import { FoodMenu } from "./features/foodMenu";
-import { FoodOrder } from "./features/foodOrder";
-
+import { useState } from "react";
 export default function Home() {
   const [state, setState] = useState("Order");
 

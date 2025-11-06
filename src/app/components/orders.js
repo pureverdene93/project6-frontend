@@ -2,10 +2,12 @@
 import { DownIcon } from "../icons/downIcon";
 import { UpAndDown } from "../icons/upAndDown";
 import { useState } from "react";
+import { OrderedFood } from "./orderFood";
 
 export const Orders = (props) => {
   const [state, setState] = useState(false);
   const [status, setStatus] = useState("Pending");
+  const [orderFoodState, setOrderedFoodState] = useState(false);
   const { countDeliveryState, index } = props;
 
   const handleDelivered = () => {
@@ -26,6 +28,10 @@ export const Orders = (props) => {
   const statusBtn = () => {
     setState(!state);
   };
+  const changeOrderedFoodState = () => {
+    setOrderedFoodState(!orderFoodState);
+    setState(false);
+  };
   console.log("this is state", state);
 
   return (
@@ -45,16 +51,26 @@ export const Orders = (props) => {
           testOrder@gmail.com
         </span>
       </div>
-      <div className="w-40 h-14 flex justify-start items-center">
+      <div className="w-40 h-14 flex justify-start items-center relative">
         <span
           className="text-[14px] w-[130px] font-medium text-gray-500 pl-4
         flex items-center justify-between"
         >
           2 foods
-          <button className="cursor-pointer">
+          <button className="cursor-pointer" onClick={changeOrderedFoodState}>
             <DownIcon />
           </button>
         </span>
+        {orderFoodState === true ? (
+          <div
+            className="absolute min-w-[264px] min-h-12 bg-white z-10
+            rounded-xl border border-zinc-300 p-3 flex flex-col gap-3 mt-[110px]"
+          >
+            <OrderedFood />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="w-40 h-14 flex justify-start items-center">
         <span className="text-[14px] font-medium text-gray-500 pl-4">

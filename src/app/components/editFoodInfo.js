@@ -3,10 +3,22 @@ import { useEffect, useState } from "react";
 import { SetFalseDeliveryState } from "../icons/setFalseDeliveryState-icon";
 import { DeleteIconSVG } from "../icons/deleteIcon";
 import { DropDown } from "../icons/dropdown-icon";
+import { AddImage } from "./addImage";
 
 const option = {
   method: "GET",
 };
+// const postOptions = {
+//   method: "POST",
+//   headers: {
+//     "content-type": "application/json",
+//     accept: "application/json",
+//   },
+//   body: JSON.stringify({
+//     // email: email,
+//     // password: password,
+//   }),
+// };
 
 export const EditFoodInfo = (props) => {
   const { exit } = props;
@@ -15,11 +27,19 @@ export const EditFoodInfo = (props) => {
 
   const [categoryData, setCategoryData] = useState([]);
   const [dropDown, setDropDown] = useState(false);
+  const [changeCategory, setChangeCategory] = useState("Change category");
 
   const getData = async () => {
     const categoryData = await fetch(categoryApiLink, option);
     const jsonCategoryData = await categoryData.json();
     setCategoryData(jsonCategoryData);
+  };
+
+  console.log(changeCategory, "changeCategory");
+
+  const clickAndChangeCategory = (newCategory) => {
+    setChangeCategory(newCategory);
+    setDropDown(false);
   };
 
   useEffect(() => {
@@ -31,9 +51,9 @@ export const EditFoodInfo = (props) => {
       className="fixed z-50 bg-[rgba(0,0,0,0.5)] w-full h-full
       top-0 left-0 flex justify-center items-center"
     >
-      <div className="w-[472px] h-[596px] bg-white rounded-xl">
-        <div className="w-[424px] flex flex-col">
-          <div className="flex items-center">
+      <div className="w-[472px] h-[596px] bg-white rounded-xl flex justify-center">
+        <div className="w-[424px] flex flex-col justify-around">
+          <div className="flex items-center w-[424px] justify-between">
             <p className="text-black font-semibold text-[18px]">Dishes info</p>
             <button
               className="w-9 h-9 bg-zinc-300 rounded-full flex justify-center
@@ -43,7 +63,7 @@ export const EditFoodInfo = (props) => {
               <SetFalseDeliveryState />
             </button>
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="text-[12px] text-gray-500 font-normal">Dish name</p>
             <input
               className="border w-[288px] h-9 border-zinc-300 rounded-xl
@@ -51,36 +71,41 @@ export const EditFoodInfo = (props) => {
               placeholder="Change dish name..."
             />
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="text-[12px] text-gray-500 font-normal">
               Dish category
             </p>
             <div
-              className="w-[288px] h-9 bg-white rounded-xl flex flex-row justify-around
-            border border-zinc-300 items-center"
+              className="w-[288px] h-9 bg-white rounded-xl flex flex-row justify-between
+            border border-zinc-300 items-center pl-2 pr-2"
             >
               <button
                 className="h-5 min-w-[116px] flex justify-start bg-zinc-100 text-black
               rounded-xl text-[12px] font-semibold items-center pl-2"
               >
-                Change category
+                {changeCategory}
               </button>
-              <button onClick={() => setDropDown(true)}>
+              <button
+                onClick={() => setDropDown(true)}
+                className="cursor-pointer"
+              >
                 <DropDown />
               </button>
             </div>
             {dropDown === true ? (
               <div
                 className="absolute min-w-[140px] min-h-9 bg-white rounded-xl flex flex-col p-2
-              gap-2 items-center"
+              gap-2 items-center ml-34 mt-9 border"
               >
                 {categoryData.map((category) => {
                   return (
                     <button
                       key={category._id}
-                      onClick={() => setDropDown(false)}
+                      onClick={() =>
+                        clickAndChangeCategory(category.categoryName)
+                      }
                       className="h-5 min-w-[116px] justify-start flex items-center bg-zinc-100 text-black
-                      rounded-xl text-[12px] font-semibold pl-2"
+                      rounded-xl text-[12px] font-semibold pl-2 cursor-pointer"
                     >
                       {category.categoryName}
                     </button>
@@ -91,7 +116,7 @@ export const EditFoodInfo = (props) => {
               ""
             )}
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="text-[12px] text-gray-500 font-normal">Ingredients</p>
             <input
               className="border border-zinc-300 rounded-xl w-[280px] h-20 pt-2 pl-3 pr-3 pb-2
@@ -100,15 +125,19 @@ export const EditFoodInfo = (props) => {
               type="text"
             />
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="text-[12px] text-gray-500 font-normal">Price</p>
-            <input className="border" />
+            <input
+              className="border w-[288px] h-9 border-zinc-300 rounded-xl
+              pl-3 text-[14px] text-black font-normal"
+              placeholder="Change dish price..."
+            />
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="text-[12px] text-gray-500 font-normal">Image</p>
-            <input className="border" />
+            <AddImage wh={`w-[288px] h-[116px]`} />
           </div>
-          <div className="flex">
+          <div className="flex justify-between">
             <button
               className="cursor-pointer w-12 h-10 border border-red-500 rounded-xl
             flex justify-center items-center"
@@ -127,3 +156,4 @@ export const EditFoodInfo = (props) => {
     </div>
   );
 };
+  

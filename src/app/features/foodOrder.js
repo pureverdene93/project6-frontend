@@ -3,15 +3,6 @@ import { useState } from "react";
 import { Orders } from "../components/orders";
 import { UpAndDown } from "../icons/upAndDown";
 import { ChangeAllDeliveryState } from "../components/changeAllDeliveryState";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 
 export const FoodOrder = () => {
   const [state, setState] = useState(false);

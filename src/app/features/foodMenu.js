@@ -33,12 +33,18 @@ export const FoodMenu = () => {
   //   console.log("this is category name", categoryName);
   // };
 
+  const foodCountById = (categoryId) => {
+    console.log(categoryId, foodData);
+    return foodData.filter((foodId) => foodId.category._id === categoryId)
+      .length;
+  };
+
   useEffect(() => {
     getDataTest();
   }, []);
 
   return (
-    <div className="flex flex-col gap-6  h-screen overflow-y-scroll">
+    <div className="flex flex-col gap-6">
       <div className="flex justify-end">
         <img
           src="/me.jpg"
@@ -60,6 +66,7 @@ export const FoodMenu = () => {
                 <CategoryButton
                   categoryName={category.categoryName}
                   // showedByCategory={showCategoryByName}
+                  foodCount={foodCountById(category._id)}
                 />
               </div>
             );
@@ -117,24 +124,15 @@ export const FoodMenu = () => {
           )}
         </div>
       </div>
-      {categoryData.map((category) => {
-        return (
-          <div key={category._id}>
-            <CategorySection category={category} />
-          </div>
-        );
-      })}
+      <div className="flex flex-col gap-6 overflow-y-scroll">
+        {categoryData.map((category) => {
+          return (
+            <div key={category._id}>
+              <CategorySection category={category} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
-{
-  /* {categoryName === "All dishes"
-        ? categoryData.map((category) => {
-            return (
-              <div key={category._id}>
-                <CategorySection category={category} />
-              </div>
-            );
-          })
-        : ""} */
-}

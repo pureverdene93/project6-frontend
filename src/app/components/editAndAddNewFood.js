@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { SetFalseDeliveryState } from "../icons/setFalseDeliveryState-icon";
+import { AddImage } from "./addImage";
 
 export const EditAndAddNewFood = (props) => {
   const { exit, title, foodName } = props;
@@ -57,34 +58,7 @@ export const EditAndAddNewFood = (props) => {
         </div>
         <div className="flex flex-col w-[412px] items-baseline gap-2">
           <p>Food image</p>
-          <label htmlFor="image-upload" className="w-[412px] h-[138px]">
-            {!image && (
-              <div>
-                <input
-                  className="w-[412px] h-[138px] border-dashed border bg-blue-50
-                              border-blue-300 rounded-xl"
-                  type="file"
-                  id="image-upload"
-                  onChange={imageUpload}
-                />
-              </div>
-            )}
-            {image && (
-              <div className="w-[412px] h-[138px] relative flex justify-end items-start">
-                <img
-                  src={image}
-                  className="w-full h-full object-cove z-[-1] absolute rounded-xl"
-                />
-                <button
-                  className="w-9 h-9 bg-zinc-200 rounded-full flex justify-center
-                  items-center cursor-pointer mr-[5px] mt-[5px]"
-                  onClick={() => setImage(null)}
-                >
-                  <SetFalseDeliveryState />
-                </button>
-              </div>
-            )}
-          </label>
+          <AddImage wh={`w-[412px] h-[138px]`} />
         </div>
 
         <div className="w-[412px] flex justify-end">
