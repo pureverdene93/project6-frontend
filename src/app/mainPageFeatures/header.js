@@ -9,11 +9,13 @@ import { AddLocIcon } from "../icons/addLocIcon";
 import { AddAdress } from "../mainPageComponents/addAdress";
 import { UserSection } from "../mainPageComponents/userSection";
 import { jwtDecode } from "jwt-decode";
+import { OrderInfo } from "../mainPageComponents/order-info";
 
 export const Header = () => {
   const router = useRouter();
   const [locationState, setLocationState] = useState(false);
   const [userState, setUserState] = useState(false);
+  const [orderState, setOrderState] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -47,7 +49,10 @@ export const Header = () => {
                   Add Location <AddLocIcon />
                 </button>
               </div>
-              <button className="w-9 h-9 bg-white cursor-pointer flex justify-center items-center rounded-full">
+              <button
+                className="w-9 h-9 bg-white cursor-pointer flex justify-center items-center rounded-full"
+                onClick={() => setOrderState(true)}
+              >
                 <ShoppingIcon />
               </button>
               <button
@@ -76,6 +81,7 @@ export const Header = () => {
           )}
           {locationState && <AddAdress exit={() => setLocationState(false)} />}
           {userState && <UserSection exit={() => setUserState(false)} />}
+          {orderState && <OrderInfo exit={() => setOrderState(false)} />}
         </div>
       </div>
     </div>
